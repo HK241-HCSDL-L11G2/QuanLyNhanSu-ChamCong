@@ -20,8 +20,8 @@ app.post('/api/login', async (req, res) => {
 
     try {
         // Check user credentials in the database
-        const sql = 'SELECT username, fullname, email FROM admins WHERE username = ?';
-        const [user] = await ReadQuery(sql, [username]);
+        const sql = 'SELECT username, fullname, email FROM admins WHERE username = ? AND password = ?';
+        const [user] = await ReadQuery(sql, [username, password]);
 
         if (!user) {
             return res.status(401).json({ success: false, message: 'Invalid username or password' });
